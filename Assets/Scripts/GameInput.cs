@@ -8,21 +8,33 @@ public class GameInput : MonoBehaviour
 {
     //C#的标准事件流
     public event EventHandler OnInteractAction;
+    public event EventHandler OnInteractAlternateAction;
 
     private PlayerInputAction playerInputAction;
 
     private void Awake()
     {
         playerInputAction = new PlayerInputAction();
+        //开启输入系统
         playerInputAction.Player.Enable();
 
-        //输入系统的事件
+        //输入系统的互动事件
         playerInputAction.Player.Interact.performed += Interact_performed;
 
+        //切菜事件
+        playerInputAction.Player.InteractAlternate.performed += InteractAlternate_performed;
+
+    }
+
+    private void InteractAlternate_performed(InputAction.CallbackContext context)
+    {
+        //调用切菜互动事件
+        OnInteractAlternateAction?.Invoke(this,EventArgs.Empty);
     }
 
     private void Interact_performed(InputAction.CallbackContext obj)
     {
+        //调用互动的事件
         OnInteractAction?.Invoke(this,EventArgs.Empty);
     }
 

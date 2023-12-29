@@ -6,8 +6,7 @@ public class PlayerAnimator : MonoBehaviour
 {
     private readonly string IS_WALKING = "IsWalking";
 
-    [SerializeField]
-    private Player player;
+    [SerializeField] private Player player;
 
     private Animator animator;
 

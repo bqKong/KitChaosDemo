@@ -2,22 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter : BaseCounter
+public class CuttingCounter : BaseCounter
 {
-    [SerializeField] private KitchenObjectSO kitchenObjectSO;
-
-    //[SerializeField,Tooltip("要转移的柜台")] private ClearCounter secondClearCounter;
-    //[SerializeField] private bool testing = true;
-    //private void Update()
-    //{
-    //    if (testing && Input.GetKeyDown(KeyCode.T))
-    //    {
-    //        if (kitchenObject != null)
-    //        { 
-    //            kitchenObject.SetKitchenObjectParent(secondClearCounter);
-    //        }
-    //    }
-    //}
+    [SerializeField] private KitchenObjectSO cutKitchenObjectSO;
 
     public override void Interact(Player player)
     {
@@ -32,7 +19,7 @@ public class ClearCounter : BaseCounter
 
             }
             else
-            { 
+            {
                 //Player not carrying anything
             }
 
@@ -56,8 +43,23 @@ public class ClearCounter : BaseCounter
             }
 
         }
+    }
+
+    public override void InteractAlternate(Player player)
+    {
+        if (HasKitchenObject())
+        { 
+            //There is  a KitchenObject here
+            //自毁
+            GetKitchenObject().DestroySelf();
+
+            //Transform kitchenObjectTransform = Instantiate(cutKitchenObjectSO.prefab);
+            //kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+            KitchenObject.SpawnKitchenObject(cutKitchenObjectSO,this);
+        }
 
 
     }
+
 
 }
