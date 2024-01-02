@@ -54,13 +54,30 @@ public class KitchenObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //KitchenObject SpawnKitchenObject()
+
+    public bool TryGetPlate(out PlateKitchenObject plateKitchenObject)
+    {
+        //玩家是否拿着盘子
+        if (this is PlateKitchenObject)
+        {
+            //Player is holding a Plate
+            plateKitchenObject = this as PlateKitchenObject;
+            return true;
+        }
+        else
+        {
+            plateKitchenObject = null;
+            return false;
+        }
+
+    }
+
 
     public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent)
     {
         Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
-        KitchenObject  kitchenObject= kitchenObjectTransform.GetComponent<KitchenObject>();
-        
+        KitchenObject kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
+
         kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
 
         return kitchenObject;
