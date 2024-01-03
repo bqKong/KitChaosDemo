@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class Player : MonoBehaviour,IKitchenObjectParent
+public class Player : MonoBehaviour, IKitchenObjectParent
 {
     //单例模式
     public static Player Instance { get; private set; }
@@ -17,6 +17,8 @@ public class Player : MonoBehaviour,IKitchenObjectParent
     {
         public BaseCounter selectedCounter;
     }
+
+    public event EventHandler OnPickSomething;
 
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
@@ -48,6 +50,8 @@ public class Player : MonoBehaviour,IKitchenObjectParent
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e)
     {
+        if (!KitchenGameManager.Instance.IsGamePlaying()) return;
+
         if (selectedCounter != null)
         {
             selectedCounter.InteractAlternate(this);
@@ -62,6 +66,8 @@ public class Player : MonoBehaviour,IKitchenObjectParent
     /// <param name="e"></param>
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
+        if (!KitchenGameManager.Instance.IsGamePlaying()) return;
+
         if (selectedCounter != null)
         {
             //这个函数在ClearCounter里面
@@ -76,7 +82,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
 
     }
 
-    public bool Is_Walking()
+    public bool IsWalking()
     {
         return isWalking;
     }
@@ -158,7 +164,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
 
                 //Attempt only Z movement
                 Vector3 moveDirZ = new Vector3(moveDir.z, 0, 0).normalized;
-                canMove = moveDir.z !=0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, PlayerRadius, moveDirZ, moveDistance);
+                canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, PlayerRadius, moveDirZ, moveDistance);
 
                 if (canMove)
                 {
@@ -209,6 +215,13 @@ public class Player : MonoBehaviour,IKitchenObjectParent
     public void SetKitchenObject(KitchenObject kitchenObject)
     {
         this.kitchenObject = kitchenObject;
+
+        //玩家拿起物体 有音效！
+        if (kitchenObject != null)
+        {
+            OnPickSomething?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 
     public KitchenObject GetKitchenObject()

@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 {
+    //公共静态事件，我们只想让每一个计数器都监听一个事件,而不希望监听每一个计数器
+    public static event EventHandler OnAnyObjectPlaceHere;
+
     [SerializeField] private Transform counterTopPoint;
     private KitchenObject kitchenObject;
 
@@ -31,6 +35,12 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
     public void SetKitchenObject(KitchenObject kitchenObject)
     {
         this.kitchenObject = kitchenObject;
+
+        if (kitchenObject != null)
+        {
+            OnAnyObjectPlaceHere?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 
     public KitchenObject GetKitchenObject()

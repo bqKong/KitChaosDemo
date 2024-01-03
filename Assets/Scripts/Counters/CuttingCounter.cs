@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class CuttingCounter : BaseCounter,IHasProgress
 {
-    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    //静态事件，防止每个挂载该脚本的物体都播放音频
+    public static event EventHandler OnAnyCut;
 
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler OnCut;
 
     [SerializeField] private CuttingRecipeSO[] cutKitchenObjectSOArray;
@@ -90,6 +92,8 @@ public class CuttingCounter : BaseCounter,IHasProgress
             cuttingProgress++;
 
             OnCut?.Invoke(this, EventArgs.Empty);
+            //静态事件调用
+            OnAnyCut?.Invoke(this, EventArgs.Empty);    
 
             CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput((GetKitchenObject().GetKitchenObjectSO()));
 
