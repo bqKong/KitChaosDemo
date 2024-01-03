@@ -41,7 +41,7 @@ public class DeliveryManagerUI : MonoBehaviour
 
         foreach (Transform child in container)
         {
-            Debug.LogWarning("child Name : " + child.name);
+            //Debug.LogWarning("child Name : " + child.name);
             if (child == recipeTemplate) continue;
             Destroy(child.gameObject);
         }

@@ -8,6 +8,14 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
     //公共静态事件，我们只想让每一个计数器都监听一个事件,而不希望监听每一个计数器
     public static event EventHandler OnAnyObjectPlaceHere;
 
+    /// <summary>
+    /// 释放静态事件
+    /// </summary>
+    public static void ResetStaticData()
+    {
+        OnAnyObjectPlaceHere = null;
+    }
+
     [SerializeField] private Transform counterTopPoint;
     private KitchenObject kitchenObject;
 

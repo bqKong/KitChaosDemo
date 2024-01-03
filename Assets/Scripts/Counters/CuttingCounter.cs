@@ -8,6 +8,14 @@ public class CuttingCounter : BaseCounter,IHasProgress
     //静态事件，防止每个挂载该脚本的物体都播放音频
     public static event EventHandler OnAnyCut;
 
+    /// <summary>
+    /// 释放静态事件
+    /// </summary>
+    public new static void ResetStaticData()
+    { 
+        OnAnyCut = null;
+    }
+
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler OnCut;
 
@@ -92,6 +100,10 @@ public class CuttingCounter : BaseCounter,IHasProgress
             cuttingProgress++;
 
             OnCut?.Invoke(this, EventArgs.Empty);
+
+            //TEST
+            Debug.Log(OnAnyCut.GetInvocationList().Length);
+
             //静态事件调用
             OnAnyCut?.Invoke(this, EventArgs.Empty);    
 
