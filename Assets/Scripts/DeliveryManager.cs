@@ -39,7 +39,9 @@ public class DeliveryManager : MonoBehaviour
         {
             spawnRecipeTimer = spawnRecipeTimerMax;
 
-            if (waitingRecipeSOList.Count < waittingRecipeMax)
+            //新增：KitchenGameManager.Instance.IsGamePlaying()
+            //保证在游戏playing的时候才生成菜谱
+            if (KitchenGameManager.Instance.IsGamePlaying() &&(waitingRecipeSOList.Count < waittingRecipeMax))
             {
                 //随机将菜单里的菜谱，赋值给waitingRecipeSO
                 RecipeSO waitingRecipeSO = recipeListSO.recipeSOList[UnityEngine.Random.Range(0, recipeListSO.recipeSOList.Count)];

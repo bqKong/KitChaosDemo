@@ -18,7 +18,10 @@ public class PlateCounter : BaseCounter
     private void Update()
     {
         spawnPlateTimer += Time.deltaTime;
-        if (spawnPlateTimer > spawnPlateTimerMax)
+
+        //新增：KitchenGameManager.Instance.IsGamePlaying()
+        //保证在游戏playing的时候才生成盘子
+        if (KitchenGameManager.Instance.IsGamePlaying() &&(spawnPlateTimer > spawnPlateTimerMax))
         {
             spawnPlateTimer = 0f;
 
