@@ -139,7 +139,9 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
+        //移动的距离
         float moveDistance = moveSpeed * Time.deltaTime;
+
         float PlayerRadius = .7f;
         float playerHeight = 2f;
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, PlayerRadius, moveDir, moveDistance);
@@ -147,9 +149,9 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         if (!canMove)
         {
 
-            //Cannot move only on the X
+            //当不能向moveDir方向移动时
 
-            //Attempt only Z movement
+            //Attempt only X movement(尝试往X轴移动)
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
             //canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, PlayerRadius, moveDirX, moveDistance);
             canMove = (moveDir.x < -.5f || moveDir.x > +.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, PlayerRadius, moveDirX, moveDistance);
@@ -160,20 +162,20 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             }
             else
             {
-                //Cannot move only on the X
+                //Cannot move only on the X(不能往X轴方向移动，尝试向Z轴方向移动)
 
-                //Attempt only Z movement
+                //Attempt only Z movement(尝试往Z轴移动)
                 Vector3 moveDirZ = new Vector3(moveDir.z, 0, 0).normalized;
                 //canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, PlayerRadius, moveDirZ, moveDistance);
                 canMove = (moveDir.z < -.5f || moveDir.z > +.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, PlayerRadius, moveDirZ, moveDistance);
                 if (canMove)
                 {
-                    //Can move only on the Z
+                    //Can move only on the Z(可以向Z轴方向移动)
                     moveDir = moveDirZ;
                 }
                 else
                 {
-                    //Can move only on any direction
+                    //Can move only on any direction(不能朝任何方向移动)
                 }
 
             }
@@ -185,13 +187,17 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             transform.position += moveDir * moveDistance;
         }
 
+        //moveDir 不能为 0(即方向键有输入)
         isWalking = moveDir != Vector3.zero;
 
         //修改前向旋转
         //transform.forward = moveDir;
 
+        //旋转
         float rotateSpeed = 10f;
+        //插值函数
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
+
     }
 
     /// <summary>

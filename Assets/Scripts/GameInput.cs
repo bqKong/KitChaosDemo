@@ -32,7 +32,7 @@ public class GameInput : MonoBehaviour
 
     }
 
-
+    [Tooltip("输入系统(新)")]
     private PlayerInputAction playerInputAction;
 
     private void Awake()
@@ -92,6 +92,7 @@ public class GameInput : MonoBehaviour
     {
         #region 新版操作
         Vector2 inputVector = playerInputAction.Player.Move.ReadValue<Vector2>();
+        
         #endregion
 
         #region 旧版操作
