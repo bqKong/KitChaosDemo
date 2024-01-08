@@ -8,6 +8,10 @@ public class KitchenObject : MonoBehaviour
 
     private IKitchenObjectParent kitchenObjectParent;
 
+    /// <summary>
+    /// 获取厨房物体身上的kitchenObjectSO
+    /// </summary>
+    /// <returns></returns>
     public KitchenObjectSO GetKitchenObjectSO() { return kitchenObjectSO; }
 
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
@@ -29,7 +33,7 @@ public class KitchenObject : MonoBehaviour
             Debug.LogError("IKitchenObjectParent already has a KitchenObject!");
 
         }
-        //设置新的kitchenObject
+        //给父物体设置kitchenObject
         kitchenObjectParent.SetKitchenObject(this);
 
         //完成父物体的变换
@@ -50,7 +54,6 @@ public class KitchenObject : MonoBehaviour
     {
         //销毁前清除父物体的kitchenobject，不然会nullreference
         kitchenObjectParent.ClearKitchenObject();
-
         Destroy(gameObject);
     }
 

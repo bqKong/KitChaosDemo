@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ContainerCounter : BaseCounter
 {
+    [Tooltip("player抓取事件，用于播放抓取动画")]
     public event EventHandler OnPlayerGrabbedObject;
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
@@ -16,7 +17,7 @@ public class ContainerCounter : BaseCounter
         //思路：检查player手上是否有物体
         if (!player.HasKitchenObject())
         {
-            //Player is not carrying anything
+            //Player is not carrying anything(Player手上没有东西)
             //Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
             //kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
             KitchenObject.SpawnKitchenObject(kitchenObjectSO, player);

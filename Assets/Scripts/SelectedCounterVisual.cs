@@ -21,6 +21,7 @@ public class SelectedCounterVisual : MonoBehaviour
     /// <param name="e"></param>
     private void Instance_OnSelectedCounterChange(object sender, Player.OnSelectedCounterChangedArgs e)
     {
+        //判断Player中检测到的Counter与视觉中的Counter是否一致
         if (e.selectedCounter == baseCounter)
         {
             Show();

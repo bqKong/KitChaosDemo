@@ -23,17 +23,18 @@ public class ClearCounter : BaseCounter
     {
         if (!HasKitchenObject())
         {
-            //There is no kitchenObject here
-            //clearcounter柜台上没有东西
+            //There is no kitchenObject here(clearcounter柜台上没有东西)
             if (player.HasKitchenObject())
             {
-                //Player is carrying something
+                //Player is carrying something(Player手上拿着东西)
+                // player.GetKitchenObject() --> player拿到这个kitchenobject
+                //将父物体设置为当前柜台
                 player.GetKitchenObject().SetKitchenObjectParent(this);
-
+                
             }
             else
             { 
-                //Player not carrying anything
+                //Player not carrying anything(Player手上没有东西)
             }
 
         }

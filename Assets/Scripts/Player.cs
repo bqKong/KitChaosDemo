@@ -10,9 +10,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public static Player Instance { get; private set; }
 
     //C#标准事件处理EventHandler
+    //专门处理selectedcounter的视觉变化
     public event EventHandler<OnSelectedCounterChangedArgs> OnSelectedCounterChanged;
 
-    //自定义事件的参数OnSelectedCounterChangedArgs，必须继承EvGameentArgs
+    //自定义事件的参数OnSelectedCounterChangedArgs，必须继承EventArgs
     public class OnSelectedCounterChangedArgs : EventArgs
     {
         public BaseCounter selectedCounter;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void Start()
     {
+        //订阅事件
         gameInput.OnInteractAction += GameInput_OnInteractAction;
         gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
         if (selectedCounter != null)
         {
-            //这个函数在ClearCounter里面
+            //Interact这个函数在ClearCounter里面
             selectedCounter.Interact(this);
         }
     }
@@ -97,15 +99,19 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
         //记录最后一次moveDir
+        //防止停止的时候moveDir为0，无法进行Raycast
         if (moveDir != Vector3.zero)
-        {
+        { 
             lastInteractDir = moveDir;
         }
 
+        //互动的距离
         float interactDistance = 2f;
+
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask))
         {
             //用这种方法，而不用标签去获取
+            //获取射线碰撞到的物体中的BaseCounter组件
             if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter))
             {
                 //有计数器
@@ -148,9 +154,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
         if (!canMove)
         {
-
             //当不能向moveDir方向移动时
-
             //Attempt only X movement(尝试往X轴移动)
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
             //canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, PlayerRadius, moveDirX, moveDistance);
@@ -201,7 +205,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     }
 
     /// <summary>
-    /// 设置
+    /// 设置当前选中的Counter(柜台)
     /// </summary>
     /// <param name="selectedCounter"></param>
     private void SetSelectedCounter(BaseCounter selectedCounter)

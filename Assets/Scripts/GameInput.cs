@@ -11,6 +11,7 @@ public class GameInput : MonoBehaviour
     private readonly string PLAYER_PREFS_BINDINGS = "IOnputBindings";
 
     //C#的标准事件流
+    //EventHandler这种写法是微软官方的事件流程写法，在Unity中可以UnityEvent
     public event EventHandler OnInteractAction;
     public event EventHandler OnInteractAlternateAction;
     public event EventHandler OnPauseAction;
@@ -40,7 +41,6 @@ public class GameInput : MonoBehaviour
         Instance = this;
 
         playerInputAction = new PlayerInputAction();
-
         //加载修改后的键位
         if (PlayerPrefs.HasKey(PLAYER_PREFS_BINDINGS))
         {
@@ -82,12 +82,20 @@ public class GameInput : MonoBehaviour
         OnInteractAlternateAction?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// 互动事件
+    /// </summary>
+    /// <param name="obj"></param>
     private void Interact_performed(InputAction.CallbackContext obj)
     {
         //调用互动的事件
         OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// 获取移动方向的归一量
+    /// </summary>
+    /// <returns></returns>
     public Vector2 GetMovementVectorNormalized()
     {
         #region 新版操作
@@ -122,7 +130,6 @@ public class GameInput : MonoBehaviour
 
         //向量归一化处理
         inputVector = inputVector.normalized;
-
         return inputVector;
     }
 
