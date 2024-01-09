@@ -25,6 +25,7 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
         Debug.LogError("BaseCounter.Interact()!");
     }
 
+    //不是所有柜台都有这个事件
     public virtual void InteractAlternate(Player player)
     {
         //Debug.LogError("BaseCounter.InteractAlternate()!");

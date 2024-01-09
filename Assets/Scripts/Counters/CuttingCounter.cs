@@ -28,8 +28,7 @@ public class CuttingCounter : BaseCounter,IHasProgress
     {
         if (!HasKitchenObject())
         {
-            //There is no kitchenObject here
-            //clearcounter柜台上没有东西
+            //There is no kitchenObject here(clearcounter柜台上没有东西)
             if (player.HasKitchenObject())
             {
                 //Player is carrying something
@@ -58,7 +57,7 @@ public class CuttingCounter : BaseCounter,IHasProgress
         else
         {
             //There is a KitchenObject here
-            //clearCounter柜台上有东西
+            //cuttingCounter柜台上有东西
             if (player.HasKitchenObject())
             {
                 //player is carrying something
@@ -125,6 +124,8 @@ public class CuttingCounter : BaseCounter,IHasProgress
 
                 //Transform kitchenObjectTransform = Instantiate(cutKitchenObjectSO.prefab);
                 //kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+
+                //生成slices并设置其初始的父物体
                 KitchenObject.SpawnKitchenObject(outputKitchenObjectSO, this);
             }
 

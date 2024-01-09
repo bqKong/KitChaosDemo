@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class TrashCounter : BaseCounter
 {
-
     //静态事件
     public static event EventHandler OnAnyObjectTrash;
 

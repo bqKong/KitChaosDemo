@@ -58,9 +58,10 @@ public class StoveCounter : BaseCounter,IHasProgress
 
                     if (fryingTimer > fryingRecipeSO.fryingTimerMax)
                     {
-                        //Fried
+                        //Fried(煎好了)
                         GetKitchenObject().DestroySelf();
 
+                        //生成剪好的肉，并设置其父对象
                         KitchenObject.SpawnKitchenObject(fryingRecipeSO.output, this);
 
                         //Debug.Log("Object fried!");
@@ -117,14 +118,13 @@ public class StoveCounter : BaseCounter,IHasProgress
     {
         if (!HasKitchenObject())
         {
-            //There is no kitchenObject here
-            //clearcounter柜台上没有东西
+            //There is no kitchenObject here(StoveCounter柜台上没有东西)
             if (player.HasKitchenObject())
             {
                 //Player is carrying something
                 if (HasRecipeWithInput(player.GetKitchenObject().GetKitchenObjectSO()))
                 {
-                    //Player carrying something that can be Fried
+                    //Player carrying something that can be Fried(角色拿着的物品可以被煎)
                     player.GetKitchenObject().SetKitchenObjectParent(this);
 
                     fryingRecipeSO = GetFryingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
@@ -145,14 +145,13 @@ public class StoveCounter : BaseCounter,IHasProgress
             }
             else
             {
-                //Player not carrying anything
+                //Player not carrying anything(角色没有拿着物品)
             }
 
         }
         else
         {
-            //There is a KitchenObject here
-            //clearCounter柜台上有东西
+            //There is a KitchenObject here(StoveCounter柜台上有东西)
             if (player.HasKitchenObject())
             {
                 //player is carrying something
@@ -185,10 +184,8 @@ public class StoveCounter : BaseCounter,IHasProgress
             }
             else
             {
-                //Player is not carrying anything
-                //Player没有提着东西
-
-                //那就可以让玩家举着
+                //Player is not carrying anything(Player手里没有物品)
+                //那就可以让玩家拾取物品
                 GetKitchenObject().SetKitchenObjectParent(player);
 
                 state = State.Idle;
