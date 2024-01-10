@@ -37,7 +37,5 @@ public class PlateCompleteVisual : MonoBehaviour
                 kitchenObjectSOGameObject.gameObject.SetActive(true);
             }
         }
-
-        //e.kitchenObjectSO
     }
 }

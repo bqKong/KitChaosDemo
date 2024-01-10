@@ -58,12 +58,17 @@ public class KitchenObject : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 检查KitchenObject是否为盘子
+    /// </summary>
+    /// <param name="plateKitchenObject"></param>
+    /// <returns></returns>
     public bool TryGetPlate(out PlateKitchenObject plateKitchenObject)
     {
         //玩家是否拿着盘子
         if (this is PlateKitchenObject)
         {
-            //Player is holding a Plate
+            //Player is holding a Plate(玩家拿着的是盘子)
             plateKitchenObject = this as PlateKitchenObject;
             return true;
         }

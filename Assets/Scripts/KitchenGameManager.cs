@@ -61,7 +61,6 @@ public class KitchenGameManager : MonoBehaviour
         switch (state)
         {
             case State.WaitingToStart:
-
                 break;
 
             case State.CountdownToStart:
@@ -134,8 +133,6 @@ public class KitchenGameManager : MonoBehaviour
             OnGameUnPaused?.Invoke(this, EventArgs.Empty);
         }
         
-
     }
-
 
 }

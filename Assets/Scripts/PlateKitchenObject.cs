@@ -13,8 +13,10 @@ public class PlateKitchenObject : KitchenObject
         public KitchenObjectSO kitchenObjectSO;
     }
 
+    [Tooltip("能放入盘子的食材列表")]
     [SerializeField] private List<KitchenObjectSO> validKitchenObjectSOList;
 
+    [Tooltip("当前盘子里的食材列表")]
     private List<KitchenObjectSO> kitchenObjectSOList;
 
     private void Awake()
@@ -45,9 +47,12 @@ public class PlateKitchenObject : KitchenObject
             return true;
         }
 
-
     }
 
+    /// <summary>
+    /// 返回当前盘子里的食材列表(当前盘子有什么食材)
+    /// </summary>
+    /// <returns></returns>
     public List<KitchenObjectSO> GetKitchenObjectSOList()
     { 
         return kitchenObjectSOList;

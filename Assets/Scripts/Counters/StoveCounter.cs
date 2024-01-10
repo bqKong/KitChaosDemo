@@ -29,6 +29,7 @@ public class StoveCounter : BaseCounter,IHasProgress
     private State state;
     private float fryingTimer;
     private FryingRecipeSO fryingRecipeSO;
+
     private float burningTimer;
     private BurningRecipeSO burningRecipeSO;
 
@@ -44,13 +45,14 @@ public class StoveCounter : BaseCounter,IHasProgress
         {
             switch (state)
             {
+               
                 case State.Idle:
-
                     break;
 
                 case State.Frying:
                     fryingTimer += Time.deltaTime;
 
+                    //OnprogressChanged这个事件会在ProgressUI中完成订阅
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
                     {
                         progressNormalized = fryingTimer / fryingRecipeSO.fryingTimerMax
@@ -59,14 +61,17 @@ public class StoveCounter : BaseCounter,IHasProgress
                     if (fryingTimer > fryingRecipeSO.fryingTimerMax)
                     {
                         //Fried(煎好了)
+                        //剪好了就销毁当前的生肉
                         GetKitchenObject().DestroySelf();
 
-                        //生成剪好的肉，并设置其父对象
+                        //生成煎好的肉(熟肉)，并设置其父对象
                         KitchenObject.SpawnKitchenObject(fryingRecipeSO.output, this);
 
                         //Debug.Log("Object fried!");
 
+                        //切换状态，到-->BurnedMeat
                         state = State.Fried;
+
                         burningTimer = 0f;
                         burningRecipeSO = GetBurningRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
@@ -85,9 +90,9 @@ public class StoveCounter : BaseCounter,IHasProgress
 
                     if (burningTimer > burningRecipeSO.burningTimerMax)
                     {
-                        //Burned
+                        //Burned(焦了),销毁熟肉
                         GetKitchenObject().DestroySelf();
-
+                        //生成烤焦的肉
                         KitchenObject.SpawnKitchenObject(burningRecipeSO.output, this);
 
                         //Debug.Log("Object Burned!");
@@ -198,8 +203,6 @@ public class StoveCounter : BaseCounter,IHasProgress
                     progressNormalized = 0f
                 });
             }
-
-
 
         }
     }

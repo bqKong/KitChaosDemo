@@ -17,6 +17,10 @@ public class DeliveryManagerSingleUI : MonoBehaviour
         iconTemplate.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 生成菜单UI里面所需食材对应的icon
+    /// </summary>
+    /// <param name="recipeSO"></param>
     public void SetRecipeSO(RecipeSO recipeSO)
     { 
         recipeName.text = recipeSO.recipeName;

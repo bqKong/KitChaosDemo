@@ -71,8 +71,7 @@ public class DeliveryManager : MonoBehaviour
             //如果菜谱里面的厨房物体(食材)数量等于盘子里的厨房物体(食材)数量
             if (waitingRecipeSO.kitchenObjectSOList.Count == plateKitchenObject.GetKitchenObjectSOList().Count)
             {
-                //Has the same number of ingredients
-
+                //Has the same number of ingredients(订单中的菜品与送上去的菜品由同样数量的物品组成)
 
                 //盘子里的菜是否匹配菜谱
                 bool plateContentMatchesRecipe = true;
@@ -80,7 +79,7 @@ public class DeliveryManager : MonoBehaviour
                 //遍历 比对 菜谱里面的每一种食材
                 foreach (KitchenObjectSO recipeKitchenObjectSO in waitingRecipeSO.kitchenObjectSOList)
                 {
-                    //Cycling through all ingredients in the recipe
+                    //Cycling through all ingredients in the recipe(遍历订单中的菜品所组成的食材)
 
                     //是否找到对应的食材
                     bool ingredientFound = false;
@@ -88,7 +87,7 @@ public class DeliveryManager : MonoBehaviour
                     //遍历 比对 盘子里的每一种食材
                     foreach (KitchenObjectSO plateKitchenObjectSO in plateKitchenObject.GetKitchenObjectSOList())
                     {
-                        //Cycling through all ingredients in the plate
+                        //Cycling through all ingredients in the plate(遍历送上去的菜品的所有食材)(盘子里的食材)
 
                         //如果盘子里的食材 匹配 菜谱的菜
                         if (plateKitchenObjectSO == recipeKitchenObjectSO)

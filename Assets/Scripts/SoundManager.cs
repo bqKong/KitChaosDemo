@@ -87,6 +87,10 @@ public class SoundManager : MonoBehaviour
         PlaySound(audioClipRefsSO.warning, Vector3.zero, volume);
     }
 
+    /// <summary>
+    /// 播放警报音(用于StoveCounter煮肉的warning)
+    /// </summary>
+    /// <param name="position"></param>
     public void PlayWarningSound(Vector3 position)
     {
         PlaySound(audioClipRefsSO.warning, position);

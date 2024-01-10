@@ -34,18 +34,16 @@ public class PlateCounter : BaseCounter
 
         }
 
-
-
     }
 
     public override void Interact(Player player)
     {
         if (!player.HasKitchenObject())
         {
-            //Player is empty handed
+            //Player is empty handed(Player手上没有东西)
             if (platesSpawnedAmount > 0)
             {
-                //There's at lease one plate here
+                //There's at lease one plate here(PlateCounter上有盘子)
                 platesSpawnedAmount--;
 
                 KitchenObject.SpawnKitchenObject(plateKitchenObjectSO, player);

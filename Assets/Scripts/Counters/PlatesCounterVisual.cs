@@ -43,8 +43,8 @@ public class PlatesCounterVisual : MonoBehaviour
     {
         Transform plateVisualTransform = Instantiate(plateVisualPrefab,counterTopPoint);
 
-
         float plateOffsetY = .1f;
+        //生成多个的时候，视觉看起来像叠在一起
         plateVisualTransform.localPosition = new Vector3(0,plateOffsetY * plateVisualGameObjectList.Count,0);
 
         plateVisualGameObjectList.Add(plateVisualTransform.gameObject);

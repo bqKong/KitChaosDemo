@@ -25,12 +25,16 @@ public class PlateIconUI : MonoBehaviour
 
     private void UpdateVisual()
     {
+        //遍历所有的下级物体
         foreach (Transform child in transform)
         {
+            //找到模版就跳过
             if (child == iconTemplate) continue;
             Destroy(child.gameObject);
         }
 
+        //遍历盘子中当前所有的食物
+        //生成对应的UI
         foreach (KitchenObjectSO kitchenObjectSO in plateKitchenObject.GetKitchenObjectSOList())
         {
             Transform iconTransform = Instantiate(iconTemplate, transform);

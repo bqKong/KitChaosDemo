@@ -52,6 +52,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e)
     {
+        //不是在游戏进行期间无法互动
         if (!KitchenGameManager.Instance.IsGamePlaying()) return;
 
         if (selectedCounter != null)
@@ -68,6 +69,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     /// <param name="e"></param>
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
+        //不是在游戏进行期间无法互动
         if (!KitchenGameManager.Instance.IsGamePlaying()) return;
 
         if (selectedCounter != null)

@@ -59,9 +59,6 @@ public class StoveCounterSound : MonoBehaviour
             }
         }
 
-
-
-
     }
 
 
