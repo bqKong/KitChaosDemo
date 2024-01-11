@@ -82,6 +82,9 @@ public class SoundManager : MonoBehaviour
         PlaySound(audioClipRefsSO.footstep, position,volume);
     }
 
+    /// <summary>
+    /// 播放灶台肉快变burned的警报音
+    /// </summary>
     public void PlayCountdownSound()
     {
         PlaySound(audioClipRefsSO.warning, Vector3.zero, volume);
@@ -96,7 +99,9 @@ public class SoundManager : MonoBehaviour
         PlaySound(audioClipRefsSO.warning, position);
     }
 
-
+    /// <summary>
+    /// 改变声音大小
+    /// </summary>
     public void ChangeVolume()
     {
         volume += .1f;
@@ -106,6 +111,7 @@ public class SoundManager : MonoBehaviour
             volume = 0f;
         }
 
+        //用PlayerPrefs保存用户的变量
         PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, volume);
         PlayerPrefs.Save();
 

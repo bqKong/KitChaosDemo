@@ -282,5 +282,4 @@ public class StoveCounter : BaseCounter,IHasProgress
            return state == State.Fried; 
     }
 
-
 }

@@ -15,7 +15,10 @@ public class StoveBurnWarningUI : MonoBehaviour
 
     private void StoveCounter_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
     {
+        //进度条过半
         float burnShowProgressAmount = .5f;
+
+        //处于State.Fried状态并且进度条过半
         bool show = stoveCounter.IsFried() &&  e.progressNormalized >= burnShowProgressAmount;
 
         if (show)

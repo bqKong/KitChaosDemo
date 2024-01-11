@@ -255,7 +255,7 @@ public class GameInput : MonoBehaviour
                         PlayerPrefs.SetString(PLAYER_PREFS_BINDINGS, playerInputAction.SaveBindingOverridesAsJson());
                         PlayerPrefs.Save();
 
-                        //重新绑定 --> TutorialUI
+                        //重新绑定 --> 更新到TutorialUI
                         OnBindingRebind?.Invoke(this,EventArgs.Empty);
                     })
             .Start();

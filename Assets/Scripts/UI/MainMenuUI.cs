@@ -22,6 +22,7 @@ public class MainMenuUI : MonoBehaviour
             Application.Quit();
         });
 
+        //取消游戏暂停，防止切换场景后场景一直处于暂停状态
         Time.timeScale = 1f;
 
     }

@@ -47,7 +47,7 @@ public class StoveCounterSound : MonoBehaviour
 
     private void Update()
     {
-
+        //定时器播放警报音
         if (playWarningSound)
         {
             warningSoundTimer -= Time.deltaTime;
